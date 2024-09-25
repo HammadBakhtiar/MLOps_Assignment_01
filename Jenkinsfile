@@ -26,7 +26,7 @@ pipeline {
         stage('Running image') {
             steps {
                 script {
-                    sh "docker run -d --name ${containerName} ${imagename}:latest"
+                    bat "docker run -d --name ${containerName} ${imagename}:latest"
                 }
             }
         }
@@ -34,8 +34,8 @@ pipeline {
         stage('Stop and Remove Container') {
             steps {
                 script {
-                    sh "docker stop ${containerName} || true"
-                    sh "docker rm ${containerName} || true"
+                    bat "docker stop ${containerName} || true"
+                    bat "docker rm ${containerName} || true"
                 }
             }
         }
@@ -44,9 +44,9 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: dockerHubCredentials, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                        bat "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
 
-                        sh "docker push ${imagename}:latest"
+                        bat "docker push ${imagename}:latest"
                     }
                 }
             }
