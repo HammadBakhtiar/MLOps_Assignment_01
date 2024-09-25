@@ -3,7 +3,7 @@ pipeline {
         imagename = "hammadbakhtiar/my_image"
         dockerImage = ''
         containerName = 'my-container'
-        dockerHubCredentials = 'secret_service'
+        dockerHubCredentials = 'dockerhub-credentials'
     }
   
     agent any
